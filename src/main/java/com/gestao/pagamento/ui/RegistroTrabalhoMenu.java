@@ -87,6 +87,17 @@ public class RegistroTrabalhoMenu {
         }
     }
 
+    public void deletarDiaDeTrabalho() {
+        visualizarDiasTrabalhados();
+        Long idRemover = lerIdRemover();
+        try {
+            registroTrabalhoRepository.deletarDiaDeTrabalho(idRemover);
+        } catch (SQLException e) {
+            System.out.println("erro no banco" + e.getMessage());
+        }
+        System.out.println("Registro de trabalho de ID: "+idRemover+" removido com sucesso");
+    }
+
     private LocalDate lerDataTrabalho() {
         System.out.println("Digite a data do dia trabalhado: ");
         String dataDiaTrabalhado = scanner.nextLine();
@@ -118,5 +129,12 @@ public class RegistroTrabalhoMenu {
             }
             System.out.println("numero invalido. Digte apenas 1 ou 2");
         }
+    }
+
+    private Long lerIdRemover() {
+        System.out.println("Digite o ID do registro que deseja remover: ");
+        Long idRemover = scanner.nextLong();
+        scanner.nextLine();
+        return idRemover;
     }
 }

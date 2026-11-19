@@ -54,4 +54,14 @@ public class RegistroTrabalhoRepository {
         }
         return trabalhosRetornados;
     }
+
+    public void deletarDiaDeTrabalho(Long id) throws SQLException {
+        String sql = "DELETE from registros_trabalho WHERE id = ?";
+        try (Connection connection = ConectionFactory.openConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+        }
+    }
 }

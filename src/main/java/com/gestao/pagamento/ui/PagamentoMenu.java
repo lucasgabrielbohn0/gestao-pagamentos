@@ -61,6 +61,19 @@ public class PagamentoMenu {
         }
     }
 
+    public void removerPagamento() {
+        vizualizarPagamentos();
+        System.out.println("Qual o ID do pagamento que deseja remover?");
+        Long idRemover = scanner.nextLong();
+        scanner.nextLine();
+        try {
+            pagamentoRepository.deletarPagamento(idRemover);
+        } catch (SQLException e) {
+            System.out.println("erro no banco" + e.getMessage());
+        }
+        System.out.println("Pagamento de ID: "+idRemover+" removido com sucesso");
+    }
+
     private LocalDate lerDataPagamento() {
         System.out.println("Qual a data do pagamento?");
         String dataDiaPagamento = scanner.nextLine();

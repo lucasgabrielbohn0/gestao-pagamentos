@@ -36,6 +36,17 @@ public class PagamentoRepository {
         }
     }
 
+    public void deletarPagamento(Long id) throws SQLException {
+        String sql = "DELETE from pagamentos WHERE id = ?";
+        try (Connection connection = ConectionFactory.openConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+
+        }
+
+    }
+
     public List<Pagamento> buscarTodosPagamentos() throws SQLException {
         List<Pagamento> pagamentosRetornados = new ArrayList<>();
         String sql = "SELECT id, data, valor FROM pagamentos ORDER BY data ASC";
